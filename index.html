@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+html, body{
+    padding: 0;
+    margin: 0;
+}
+*{
+    background: rgba(255, 0, 0, .1);
+    box-sizing: border-box;
+}
+.track{
+    height: 300vh;
+    position: relative;
+}
+.camera{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+}
+.frame{
+    display: flex;
+    height: 100%;
+}
+.item__container{
+    width: 100vw;
+    height: 100vh;
+    flex: none;
+    padding: 40px;
+}
+.item{
+    width: 100%;
+    height: 100%;
+    background: blue;
+}
+span{
+    height: 100vh;
+    display: block;
+}
+</style>
+<body>
+    <span></span>
+    <section class="track">
+        <div class="camera">
+            <div class="frame">
+                <div class="item__container">
+                    <div class="item"></div>
+                </div>
+                <div class="item__container">
+                    <div class="item"></div>
+                </div>
+                <div class="item__container">
+                    <div class="item"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <span></span>
+</body>
+<script>
+
+    const frame = document.querySelector('.frame')
+    const track = document.querySelector('.track')
+    const value = document.querySelector('.value')
+
+    // variable for animation
+    const offset = track.offsetTop 
+    const height = track.offsetHeight - frame.offsetHeight
+
+    console.log({offset});
+    console.log({height});
+
+    document.addEventListener('scroll', ()=>{
+        const rect = frame.getBoundingClientRect() // get the frame information
+        const scrollPosition = window.scrollY
+        if(rect.top === 0 ){
+            let diff = scrollPosition - offset
+            let translate = diff / height
+            translate = translate * 200
+            // console.log(translate);
+            frame.style.transform = `translateX(-${translate}vw)`
+        }
+    })
+</script>
+</html>
